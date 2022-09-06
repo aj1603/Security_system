@@ -1,0 +1,9 @@
+h1 {
+    color: darkcyan;
+    font-size: 60px;
+}
+
+body {
+    background: rgba(182, 243, 243, 0.6);
+    /* background: #747581; */
+}

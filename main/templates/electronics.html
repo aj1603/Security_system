@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Telefonlar</h1>
+<br/>
+{% for product in tel_products %} 
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <a href="#">{{ product.product_name }}</a></br>
+        {{ product.product_price }}</br>
+        {{ product.description }}</br>
+        {{ product.product_sale }}</br>
+        {{ product.dateAdded }}</br>
+    </div>
+{% endfor %}
+{% endblock %}

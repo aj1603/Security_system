@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.game_name.label(class="form-control-label" ) }}
+                {{ form.game_name(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                {{ form.description(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.game_price.label(class="form-control-label") }}
+                {{ form.game_price(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.game_sale.label(class="form-control-label") }}
+                {{ form.game_sale(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.today_sale.label(class="form-control-label") }}
+                {{ form.today_sale(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.compitation.label(class="form-control-label") }}
+                {{ form.compitation(class="form-control form-control-lg") }}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+

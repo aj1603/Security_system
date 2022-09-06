@@ -1,0 +1,122 @@
+ps4_ps5_config = [
+    {
+        "id": 1,
+        "ps4_ps5_name": "ps4",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0001",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 2,
+        "ps4_ps5_name": "ps4",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0002",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 3,
+        "ps4_ps5_name": "ps4",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0003",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 4,
+        "ps4_ps5_name": "ps4",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0004",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 5,
+        "ps4_ps5_name": "ps4",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0005",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 6,
+        "ps4_ps5_name": "ps4",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0006",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 7,
+        "ps4_ps5_name": "ps5",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0007",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 8,
+        "ps4_ps5_name": "ps5",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0008",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 9,
+        "ps4_ps5_name": "ps5",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0009",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    },
+    {
+        "id": 10,
+        "ps4_ps5_name": "ps5",
+        "ps4_ps5_price": "000000", 
+        "description": "Oýun oýnamak üçin",
+        "ps4_ps5_key": "0010",
+        "play_price": "000000",
+        "today_income": "000000",
+        "last_day_income": "000000",
+        "last_month_income": "000000",
+        "play_sale": "000000"
+    }
+]

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>OÝUNÇYLARYŇ SANAWY</h1>
+<br/>
+{% for client in our_clients %} 
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <h4><b>Ady: </b><a href="#">{{ client.name }}</a></h4>
+        <h5><b>Familiýasy: </b>{{ client.surname }}</h5>
+        <h5><b>Ulanyjy ady: </b>{{ client.username }}</h5>
+        <h5><b>Telefone belgisi: </b>{{ client.phone_number }}</h5>
+        <h5><b>Oýun wagty: </b>{{ client.play_time }}</h5>
+        <h5><b>Oýun bahasy: </b>{{ client.play_price }}</h5>
+        <h5><b>Azanlaşyk: </b>{{ client.play_sale }}</h5>
+        <h5><b>Jemi oýnamaly wagty: </b>{{ client.full_play_time }}</h5>
+    </div>
+{% endfor %}
+{% endblock %}
+
