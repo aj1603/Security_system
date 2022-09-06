@@ -9,6 +9,8 @@ class Ps4_Ps5s(db.Model):
     ps4_ps5_name = db.Column(db.String(150), nullable=False)
     ps4_ps5_price = db.Column(db.String(255))
     description = db.Column(db.String(1000))
+    play_time_today = db.Column(db.Float(200))
+    play_time_month = db.Column(db.Float(500))
     play_price = db.Column(db.Float(150))
     play_sale = db.Column(db.Float(150))
     today_income = db.Column(db.Float(150))
@@ -23,6 +25,8 @@ class Ps4_Ps5s(db.Model):
             "ps4_ps5_name": self.ps4_ps5_name,
             "ps4_ps5_price": self.ps4_ps5_price,
             "description": self.description,
+            "play_time_today": self.play_time_today,
+            "play_time_month": self.play_time_month,
             "ps4_ps5_key": self.ps4_ps5_key,
             "play_price": self.play_price,
             "today_income": self.today_income,
@@ -35,7 +39,7 @@ class Ps4_Ps5s(db.Model):
         return ps4_ps5
 
     def __repr__(self):
-        return f"User('{self.ps4_ps5_name}', '{self.ps4_ps5_price}', '{self.description}', '{self.ps4_ps5_key}', '{self.play_price}', '{self.today_income}', '{self.last_day_income}', '{self.last_month_income}', '{self.play_sale}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"User('{self.ps4_ps5_name}', '{self.ps4_ps5_price}', '{self.description}', '{self.play_time_today}', '{self.play_time_month}', '{self.today_income}', '{self.last_day_income}'{self.ps4_ps5_key}', '{self.play_price}', '{self.today_income}', '{self.last_day_income}', '{self.last_month_income}', '{self.play_sale}', '{self.dateAdded}', '{self.dateUpdated})"
 
 class Clients(db.Model):
     id = db.Column(db.Integer, primary_key=True)

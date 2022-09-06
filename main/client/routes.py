@@ -30,37 +30,46 @@ def azyk_haryt():
     azyk_products = Clients.query.filter_by(product_type=1)
     return render_template("azyk_haryt.html", azyk_products=azyk_products)
 
-# @clients.route('/game/<int:id>/delete/', methods=['GET', 'POST'])
-# def delete_game(id):
-#     delete_game = Clients.query.get_or_404(id)
-#     db.session.delete(delete_game)
-#     db.session.commit()
-#     our_games = Clients.query.all()
-#     return render_template("products.html", our_games=our_games)
+@clients.route('/client/<int:id>/delete/', methods=['GET', 'POST'])
+def delete_client(id):
+    delete_client = Clients.query.get_or_404(id)
+    db.session.delete(delete_client)
+    db.session.commit()
+    our_clients = Clients.query.all()
+    return render_template("client.html", our_clients=our_clients)
 
 
-# @clients.route('/game/<int:id>/update/', methods=['GET', 'POST'])
-# def update_game(id):
-#     games = Clients.query.get_or_404(id)
-#     form = ClientUpdateForm()
-#     if form.validate_on_submit():
-#         games.game_name = form.game_name.data
-#         games.description = form.description.data
-#         games.game_price = form.game_price.data
-#         games.game_sale = form.game_sale.data
-#         games.today_sale = form.today_sale.data
-#         games.compitation = form.compitation.data
-#         db.session.commit()
-#         our_games = Clients.query.all()
-#         return render_template("products.html", our_games=our_games)
-#     elif request.method == 'GET':
-#         form.game_name.data = games.game_name
-#         form.description.data = games.description
-#         form.game_price.data = games.game_price
-#         form.game_sale.data = games.game_sale
-#         form.today_sale.data = games.today_sale
-#         form.compitation.data = games.compitation
-#         return render_template("edit_game.html", form=form)
+@clients.route('/client/<int:id>/update/', methods=['GET', 'POST'])
+def update_client(id):
+    clients = Clients.query.get_or_404(id)
+    form = ClientUpdateForm()
+    if form.validate_on_submit():
+        clients.name = form.name.data
+        clients.surname = form.surname.data
+        clients.username = form.username.data
+        clients.password = form.password.data
+        clients.phone_number = form.phone_number.data
+        clients.secret_key = form.secret_key.data
+        clients.play_time = form.play_time.data
+        clients.play_price = form.play_price.data
+        clients.play_sale = form.play_sale.data
+        clients.full_play_time = form.full_play_time.data
+        db.session.commit()
+        our_clients = Clients.query.all()
+        return render_template("client.html", our_clients=our_clients)
+    elif request.method == 'GET':
+        form.name.data = clients.name
+        form.surname.data = clients.surname
+        form.username.data = clients.username
+        form.password.data = clients.password
+        form.phone_number.data = clients.phone_number
+        form.secret_key.data = clients.secret_key
+        form.play_time.data = clients.play_time
+        form.play_price.data = clients.play_price
+        form.play_sale.data = clients.play_sale
+        form.full_play_time.data = clients.full_play_time
+
+        return render_template("edit_client.html", form=form)
 
 @clients.route('/add_clients/', methods=['GET', 'POST'])
 def add_clients():

@@ -12,6 +12,8 @@
         <h5><b>Oýun bahasy: </b>{{ client.play_price }}</h5>
         <h5><b>Azanlaşyk: </b>{{ client.play_sale }}</h5>
         <h5><b>Jemi oýnamaly wagty: </b>{{ client.full_play_time }}</h5>
+        <a href="{{ url_for('clients.update_client', id=client.id) }}">Täzelemek</a></br>
+        <a href="{{ url_for('clients.delete_client', id=client.id) }}">Aýyrmak</a>
     </div>
 {% endfor %}
 {% endblock %}
