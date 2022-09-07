@@ -1,7 +1,11 @@
 from datetime import datetime
 from xmlrpc import client
-from main import app, db
+from main import app, db, login_manager
+from flask_login import UserMixin
 
+@login_manager.user_loader
+def load_user(user_id):
+    return Admins.query.get(int(user_id))
 
 class Ps4_Ps5s(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -122,48 +126,6 @@ class Admins(db.Model):
         
     def __repr__(self):
         return f"User('{self.name}', '{self.surname}', '{self.email}', '{self.username}', '{self.password}', '{self.passport_number}', '{self.phone_number}', '{self.secret_key}', '{self.description}', '{self.ps4_ps5_key}', '{self.play_price}', '{self.today_income}', '{self.last_day_income}', '{self.last_month_income}', '{self.play_sale}', '{self.dateAdded}', '{self.dateUpdated}')"
-
-class Securitys(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), nullable=False)
-    surname = db.Column(db.String(150))
-    email = db.Column(db.String(150), nullable=False, unique=True)
-    username = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(150))
-    phone_number = db.Column(db.String(50))
-    passport_number = db.Column(db.String(50))
-    secret_key = db.Column(db.String(150), nullable=False)
-    description = db.Column(db.String(1000))
-    play_time = db.Column(db.Float(150), nullable=False)
-    play_price = db.Column(db.Float(150), nullable=False)
-    play_sale = db.Column(db.Float(150), nullable=False)
-    full_play_time = db.Column(db.Float(200), nullable=False)
-    dateAdded = db.Column(db.DateTime,default=datetime.now())
-    dateUpdated = db.Column(db.DateTime,default=datetime.now(),onupdate=datetime.now())
-
-    def json(self):
-        security = {
-            "id": self.id,
-            "name": self.name,
-            "surname": self.surname,
-            "email": self.email,
-            "username": self.username,
-            "password": self.password,
-            "phone_number": self.phone_number,
-            "passport_number": self.passport_number,
-            "secret_key": self.secret_key,
-            "description": self.description,
-            "play_time": self.play_time,
-            "play_price": self.play_price,
-            "play_sale": self.play_sale,
-            "full_play_time": self.full_play_time,
-            "dateAdded": self.dateAdded,
-            "dateUpdated": self.dateUpdated,
-        }
-        return security
-        
-    def __repr__(self):
-        return f"User('{self.name}', '{self.surname}', '{self.email}', '{self.password}', '{self.phone_number}', '{self.secret_key}', '{self.description}', '{self.username}', '{self.play_time}', '{self.play_price}',, '{self.play_sale}', '{self.full_play_time}', '{self.dateUpdated}')"
 
 class Games(db.Model):
     id = db.Column(db.Integer, primary_key=True)

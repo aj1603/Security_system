@@ -2,6 +2,8 @@ from flask import Blueprint, session, redirect, render_template, request
 from  .forms import ClientForm, ClientUpdateForm
 from main.models import Clients
 from main import db
+import datetime
+cur_time = datetime.datetime.now()
 
 clients = Blueprint('clients', __name__)
 
