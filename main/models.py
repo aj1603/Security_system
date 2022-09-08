@@ -17,6 +17,10 @@ class Ps4_Ps5s(db.Model):
     play_time_month = db.Column(db.Float(500))
     play_price = db.Column(db.Float(150))
     play_sale = db.Column(db.Float(150))
+    game_start_time = db.Column(db.Float(200))
+    game_stop_time = db.Column(db.Float(200))
+    game_time = db.Column(db.Float(300))
+    full_game_time = db.Column(db.Float(500))
     today_income = db.Column(db.Float(150))
     last_day_income = db.Column(db.Float(200))
     last_month_income = db.Column(db.Float(300))
@@ -37,22 +41,26 @@ class Ps4_Ps5s(db.Model):
             "last_day_income": self.last_day_income,
             "last_month_income": self.last_month_income,
             "play_sale": self.play_sale,
+            "game_start_time": self.game_start_time,
+            "game_stop_time": self.game_stop_time,
+            "game_time": self.game_time,
+            "full_game_time": self.full_game_time,
             "dateAdded": self.dateAdded,
             "dateUpdated": self.dateUpdated
         }
         return ps4_ps5
 
     def __repr__(self):
-        return f"User('{self.ps4_ps5_name}', '{self.ps4_ps5_price}', '{self.description}', '{self.play_time_today}', '{self.play_time_month}', '{self.today_income}', '{self.last_day_income}'{self.ps4_ps5_key}', '{self.play_price}', '{self.today_income}', '{self.last_day_income}', '{self.last_month_income}', '{self.play_sale}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"User('{self.ps4_ps5_name}', '{self.ps4_ps5_price}', '{self.description}', '{self.game_start_time,}', '{self.game_stop_time,}','{self.game_time,}', '{self.full_game_time,}', '{self.play_time_today}', '{self.play_time_month}', '{self.today_income}', '{self.last_day_income}'{self.ps4_ps5_key}', '{self.play_price}', '{self.today_income}', '{self.last_day_income}', '{self.last_month_income}', '{self.play_sale}', '{self.dateAdded}', '{self.dateUpdated})"
 
 class Clients(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     surname = db.Column(db.String(150))
     username = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(150))
+    password = db.Column(db.String(150), unique=True)
     phone_number = db.Column(db.String(50))
-    secret_key = db.Column(db.String(150), nullable=False)
+    secret_key = db.Column(db.String(150), nullable=False, unique=True)
     play_time = db.Column(db.Float(150), nullable=False)
     play_price = db.Column(db.Float(150), nullable=False)
     play_sale = db.Column(db.Float(150), nullable=False)
@@ -81,7 +89,7 @@ class Clients(db.Model):
     def __repr__(self):
         return f"User('{self.name}', '{self.surname}', '{self.username}', '{self.password}', '{self.phone_number}', '{self.secret_key}', '{self.play_time}', '{self.play_price}',, '{self.play_sale}', '{self.full_play_time}', '{self.dateAdded}', '{self.dateUpdated}')"
 
-class Admins(db.Model):
+class Admins(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     surname = db.Column(db.String(150))
