@@ -10,7 +10,7 @@
             <a class="nav-link" href="{{ url_for('games.all_games') }}">Oýunlar sanawy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Iş ýörediji</a>
+            <a class="nav-link" href="{{ url_for('security.game_con') }}">Iş ýörediji</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('games.add_games') }}">Oýun goşmak</a>
@@ -29,13 +29,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Ulgamadan çykmak</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('admins.first_time') }}">Başlat</a>
-          </li>  
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('admins.second_time') }}">Duruz</a>
-          </li>          
+          </li>         
         </ul>
         <form class="form-inline">
           <input class="form-control mr-sm-2" style="width: 25rem" type="search" placeholder="Gözlemek" aria-label="Search">

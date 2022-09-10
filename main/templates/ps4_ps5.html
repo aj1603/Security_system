@@ -8,8 +8,14 @@
         <h5><b>Bahasy: </b>{{ game.game_price }} manat</h5>
         <h5><b>Arzanladyş: </b>{{ game.game_sale }}</h5>
         <h5><b>Häsiýetnama: </b>{{ game.description }}</h5>
-        <a href="{{ url_for('games.update_game', id=game.id) }}">Täzelemek</a></br>
-        <a href="{{ url_for('games.delete_game', id=game.id) }}">Aýyrmak</a>
+        <a href="{{ url_for('games.update_game', id=game.id) }}">
+            <button class="GFG">
+            Täzelemek
+            </button></a></br>
+        <a href="{{ url_for('games.delete_game', id=game.id) }}">
+            <button class="GFG">
+                Täzelemek
+            </button></a>        
     </div>
 {% endfor %}
 {% endblock %}

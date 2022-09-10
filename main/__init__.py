@@ -20,12 +20,12 @@ from . import models
 
 from main.security.routes import security
 from main.admin.routes import admins
-# from main.games.routes import ps4_ps5
+from main.ps4_ps5.routes import ps4_ps5s
 from main.main_ui.routes import main_ui
 from main.client.routes import clients
 from main.games.routes import games
 
-# app.register_blueprint(ps4_ps5)
+app.register_blueprint(ps4_ps5s)
 app.register_blueprint(admins)
 app.register_blueprint(security)
 app.register_blueprint(main_ui)

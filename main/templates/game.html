@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>PS4_PS5-nyň SANAWY</h1>
+<br/>
+{% for game_con in game_cons %} 
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <h4><b>Ady: </b><a href="#">{{ game_con.ps4_ps5_name }}</a></h4>
+        <h5><b>Arzanladyş: </b>{{ game_con.play_sale }} %</h5>
+        <h5><b>Başlanan wagty: </b>{{ game_con.game_start_time }}</h5>
+        <h5><b>Gutaran wagty: </b>{{ game_con.game_stop_time }}</h5>
+        <h5><b>Oýnan wagty: </b>{{ game_con.game_time }}</h5>
+        <h5><b>Bahasy: </b>{{ game_con.today_income }} manat</h5>
+        <a href="{{ url_for('ps4_ps5s.first_time', id=game_con.id) }}">Başlat</a></br>
+        <a href="{{ url_for('ps4_ps5s.second_time', id=game_con.id) }}">Sakla</a>
+    </div>
+{% endfor %}
+{% endblock %}
+

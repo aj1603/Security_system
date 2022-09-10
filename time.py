@@ -69,15 +69,32 @@
 
 # countdown(int(t))
 
-import threading
+# import threading
+# import datetime
+# e = datetime.datetime.now()
+
+# def gfg():
+# 	print("GeeksforGeeks\n")
+
+# timer = threading.Timer(8.0, gfg)
+# print(e)
+# timer.start()
+# print("Exit\n")
+# print()
+
 import datetime
-e = datetime.datetime.now()
 
-def gfg():
-	print("GeeksforGeeks\n")
+def parse_duration(s):
+    return list(map(lambda x: int(x), s.split(":")))
 
-timer = threading.Timer(8.0, gfg)
-print(e)
-timer.start()
-print("Exit\n")
-print()
+inp1 = "70:30:00"
+[h1, m1, s1] = parse_duration(inp1)
+d1 = datetime.timedelta(hours=h1, minutes=m1, seconds=s1)
+
+
+inp2 = "00:30:00"
+[h2, m2, s2] = parse_duration(inp2)
+d2 = datetime.timedelta(hours=h2, minutes=m2, seconds=s2)
+
+res = d1 + d2
+print(res)
