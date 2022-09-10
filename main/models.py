@@ -45,14 +45,15 @@ class Ps4_Ps5s(db.Model):
             "game_start_time": self.game_start_time,
             "game_stop_time": self.game_stop_time,
             "game_time": self.game_time,
-            "full_game_time": self.full_game_time,
+            "full_game_hours": self.full_game_hours,
+            "full_game_minutes": self.full_game_minutes,
             "dateAdded": self.dateAdded,
             "dateUpdated": self.dateUpdated
         }
         return ps4_ps5
 
     def __repr__(self):
-        return f"User('{self.ps4_ps5_name}', '{self.ps4_ps5_price}', '{self.description}', '{self.game_start_time,}', '{self.game_stop_time,}','{self.game_time,}', '{self.full_game_time,}', '{self.play_time_today}', '{self.play_time_month}', '{self.today_income}', '{self.last_day_income}'{self.ps4_ps5_key}', '{self.play_price}', '{self.today_income}', '{self.last_day_income}', '{self.last_month_income}', '{self.play_sale}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"User('{self.ps4_ps5_name}', '{self.ps4_ps5_price}', '{self.description}', '{self.game_start_time,}', '{self.game_stop_time,}','{self.game_time,}', '{self.full_game_hours,}', '{self.full_game_minutes,}', '{self.play_time_today}', '{self.play_time_month}', '{self.today_income}', '{self.last_day_income}'{self.ps4_ps5_key}', '{self.play_price}', '{self.today_income}', '{self.last_day_income}', '{self.last_month_income}', '{self.play_sale}', '{self.dateAdded}', '{self.dateUpdated})"
 
 class Clients(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -157,10 +158,11 @@ class Games(db.Model):
             "play_sale": self.game_sale,
             "today_sale": self.today_sale,
             "compitation": self.compitation,
+            "game_pictures": self.game_pictures,
             "dateAdded": self.dateAdded,
             "dateUpdated": self.dateUpdated,
         }
         return play
 
     def __repr__(self):
-        return f"User('{self.game_name}', '{self.description}', '{self.game_price}', '{self.today_sale}', '{self.compitation}', '{self.game_sale}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"User('{self.game_name}', '{self.description}', '{self.game_price}', '{self.today_sale}', '{self.compitation}', '{self.game_sale}', '{self.game_pictures}', '{self.dateAdded}', '{self.dateUpdated})"
