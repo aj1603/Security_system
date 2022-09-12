@@ -18,19 +18,9 @@ login_manager.login_message_category = 'info'
 
 from . import models
 
-from main.security.routes import security
 from main.admin.routes import admins
-from main.ps4_ps5.routes import ps4_ps5s
-from main.main_ui.routes import main_ui
-from main.client.routes import clients
-from main.games.routes import games
 
-app.register_blueprint(ps4_ps5s)
 app.register_blueprint(admins)
-app.register_blueprint(security)
-app.register_blueprint(main_ui)
-app.register_blueprint(clients)
-app.register_blueprint(games)
 
 
 

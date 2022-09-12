@@ -4,6 +4,7 @@ h1 {
 }
 
 body {
-    background: rgba(182, 243, 243, 0.6);
+    /* background-image: './templates/PS_PROJECT/arkafon.jpg' */
     /* background: #747581; */
+    background-image: "./templates/pictures/arkafon.jpg"
 }

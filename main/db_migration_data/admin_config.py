@@ -12,7 +12,7 @@ admins = [
 securitys = [
     {
         "id": 1,
-        "name": "securyti_",
+        "name": "Securyti",
         "surname": "securyti_ow",
         "email": "securyti_@gmail.com",
         "password": "securyti_123",
