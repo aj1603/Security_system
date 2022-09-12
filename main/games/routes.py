@@ -1,14 +1,14 @@
-from turtle import pos
 from flask import render_template, Blueprint, request, redirect, url_for
 from .forms import GameForm, GameUpdateForm
-from main.models import Games
-from main import db
+from main import db, app
+from main.models import Station
 
 games = Blueprint('games', __name__)
 
 @games.route('/all_games/')
 def all_games():
-    our_games = Games.query.all()
+    our_games = Station.query.all()
+    print('All games')
     return render_template("products.html", our_games=our_games)
 
 @games.route('/for_logo/')

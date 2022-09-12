@@ -1,5 +1,5 @@
 from flask import Blueprint, session, redirect, render_template
-from main.models import Ps4_Ps5s, Admins
+from main.models import Station, Admin
 from main import db
 from datetime import datetime
     
@@ -118,12 +118,12 @@ def count_price(id):
 @ps4_ps5s.route('/month_count_price/')
 def month_count_price():
     try:
-        boss_money = Admins.query.filter_by(id = 1).first()
+        boss_money = Admin.query.filter_by(id = 1).first()
         full_today_money = boss_money.today_income
         boss_money.last_month_income += full_today_money
         boss_money.today_income = nol
         db.session.commit()
-        boss_report = Admins.query.all()
+        boss_report = Admin.query.all()
         return render_template("report_month.html", boss_report = boss_report)
     except Exception as ex:
         print(f"error, couldn't make a request (connection issue) {ex}",200)
@@ -153,10 +153,10 @@ def full_count_price():
         ps_9 = games_8.today_income 
         ps_10 = games_9.today_income 
         full_today_money = (ps_1 + ps_2 + ps_3 + ps_4 + ps_5 + ps_6 + ps_7 + ps_8 + ps_9 + ps_10)
-        boss_money = Admins.query.filter_by(id = 1).first()
+        boss_money = Admin.query.filter_by(id = 1).first()
         boss_money.today_income = full_today_money
         db.session.commit()
-        boss_report = Admins.query.all()
+        boss_report = Admin.query.all()
         return render_template("report_today.html", boss_report = boss_report)
     except Exception as ex:
         print(f"error, couldn't make a request (connection issue) {ex}",200)

@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-from main.models import Admins, Ps4_Ps5s
+from main.models import Admin, Station
 from main import db
 
 security = Blueprint('security', __name__)

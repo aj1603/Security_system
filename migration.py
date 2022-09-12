@@ -1,11 +1,11 @@
 from main import db
 
 from main.models import (
-    Ps4_Ps5,
+    Station,
     Admin,
-    DayInfo,
-    MonthInfo,
-    Device,
+    Day,
+    Month,
+    Node,
     Client,
 )
 
@@ -21,6 +21,6 @@ for admin in admins:
     db.session.commit()
 
 for ps4_ps5 in ps4_ps5_config:
-    db_ps4_ps5 = Ps4_Ps5(**ps4_ps5)
+    db_ps4_ps5 = Station(**ps4_ps5)
     db.session.add(db_ps4_ps5)
     db.session.commit()

@@ -1,5 +1,5 @@
 from flask import Blueprint, session, redirect, render_template
-from main.models import Ps4_Ps5s
+from main.models import Station
 from main import db
 from datetime import datetime,timedelta
     
@@ -14,7 +14,7 @@ def home():
 
 @admins.route('/all_ps4_ps5/')
 def all_ps4_ps5():
-    ps4_ps5s = Ps4_Ps5s.query.all()
+    ps4_ps5s = Station.query.all()
     return render_template("boss.html", ps4_ps5s=ps4_ps5s)
 
 # /change-language/tk

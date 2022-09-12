@@ -4,14 +4,7 @@
 <br/>
 {% for ps4_ps5 in ps4_ps5s %} 
     <div class="shadow p-3 mb-5 bg-body rounded">
-        <h4><b>Ady: </b><a href="#">{{ ps4_ps5.ps4_ps5_name }}</a></h4>
-        <h5><b>PS4_PS5-iň açar sözi: </b>{{ ps4_ps5.ps4_ps5_key }}</h5>
-        <h5><b>PS4_PS5-iň bahasy: </b>{{ ps4_ps5.ps4_ps5_price }} manat</h5>
-        <h5><b>Häsiýetnamasy: </b>{{ ps4_ps5.description }}</h5>
-        <h5><b>Girdeýji (şu gün): </b>{{ ps4_ps5.today_income }} manat</h5>
-        <h5><b>Girdeýji (düýn): </b>{{ ps4_ps5.last_day_income }} manat</h5>
-        <h5><b>Girdeýji (şu aý): </b>{{ ps4_ps5.last_month_income }} manat</h5>
-        <h4><b><a href="{{ url_for('ps4_ps5s.count_price', id=ps4_ps5.id) }}">Hasapla</a></b>
+        <h4><b>Ady: </b><a href="#">{{ ps4_ps5.name }}</a></h4>
     </div>
 {% endfor %}
 {% endblock %}

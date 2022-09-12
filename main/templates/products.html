@@ -4,12 +4,7 @@
 <br/>
 {% for game in our_games %} 
     <div class="shadow p-3 mb-5 bg-body rounded">
-        <h4><b>Ady: </b><a href="#">{{ game.game_name }}</a></h4>
-        <h5><b>Bahasy: </b>{{ game.game_price }} manat</h5>
-        <h5><b>Arzanladyş: </b>{{ game.game_sale }}</h5>
-        <h5><b>Häsiýetnama: </b>{{ game.description }}</h5>
-        <a href="{{ url_for('games.update_game', id=game.id) }}">Täzelemek</a></br>
-        <a href="{{ url_for('games.delete_game', id=game.id) }}">Aýyrmak</a>
+        <h4><b>Ady: </b></h4>
     </div>
 {% endfor %}
 {% endblock %}
