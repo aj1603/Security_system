@@ -1,5 +1,5 @@
 from flask import Blueprint, session, redirect, render_template
-from main.models import Ps4_Ps5s
+from main.models import Ps4_Ps5s, Admins
 from main import db
 from datetime import datetime
     
@@ -114,3 +114,50 @@ def count_price(id):
         return "Hasaplandy"
     except Exception as ex:
         print(f"error, couldn't make a request (connection issue) {ex}",200)
+
+@ps4_ps5s.route('/month_count_price/')
+def month_count_price():
+    try:
+        boss_money = Admins.query.filter_by(id = 1).first()
+        full_today_money = boss_money.today_income
+        boss_money.last_month_income += full_today_money
+        boss_money.today_income = nol
+        db.session.commit()
+        boss_report = Admins.query.all()
+        return render_template("report_month.html", boss_report = boss_report)
+    except Exception as ex:
+        print(f"error, couldn't make a request (connection issue) {ex}",200)
+
+
+@ps4_ps5s.route('/full_count_price/')
+def full_count_price():
+    try:
+        games_0 = Ps4_Ps5s.query.filter_by(id = 1).first()
+        games_1 = Ps4_Ps5s.query.filter_by(id = 2).first()
+        games_2 = Ps4_Ps5s.query.filter_by(id = 3).first()
+        games_3 = Ps4_Ps5s.query.filter_by(id = 4).first()
+        games_4 = Ps4_Ps5s.query.filter_by(id = 5).first()
+        games_5 = Ps4_Ps5s.query.filter_by(id = 6).first()
+        games_6 = Ps4_Ps5s.query.filter_by(id = 7).first()
+        games_7 = Ps4_Ps5s.query.filter_by(id = 8).first()
+        games_8 = Ps4_Ps5s.query.filter_by(id = 9).first()
+        games_9 = Ps4_Ps5s.query.filter_by(id = 10).first()
+        ps_1 = games_0.today_income
+        ps_2 = games_1.today_income 
+        ps_3 = games_2.today_income 
+        ps_4 = games_3.today_income 
+        ps_5 = games_4.today_income 
+        ps_6 = games_5.today_income 
+        ps_7 = games_6.today_income 
+        ps_8 = games_7.today_income 
+        ps_9 = games_8.today_income 
+        ps_10 = games_9.today_income 
+        full_today_money = (ps_1 + ps_2 + ps_3 + ps_4 + ps_5 + ps_6 + ps_7 + ps_8 + ps_9 + ps_10)
+        boss_money = Admins.query.filter_by(id = 1).first()
+        boss_money.today_income = full_today_money
+        db.session.commit()
+        boss_report = Admins.query.all()
+        return render_template("report_today.html", boss_report = boss_report)
+    except Exception as ex:
+        print(f"error, couldn't make a request (connection issue) {ex}",200)
+

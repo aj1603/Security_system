@@ -6,30 +6,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('games.all_games') }}">Oýunlar sanawy</a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('ps4_ps5s.game_con') }}">Iş ýörediji</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('games.add_games') }}">Oýun goşmak</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('clients.all_clients') }}">Oýunçy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('clients.add_clients') }}">Oýunçy goşmak</a>
-          </li>
+          </li>          
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('admins.all_ps4_ps5') }}">Başlyk</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Ulgama girmek</a>
+            <a class="nav-link" href="{{ url_for('ps4_ps5s.full_count_price') }}">Günlik hasaplamak</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Ulgamadan çykmak</a>
-          </li>         
+            <a class="nav-link" href="{{ url_for('ps4_ps5s.month_count_price') }}">Aýlyk hasaplamak</a>
+          </li>        
         </ul>
         <form class="form-inline">
           <input class="form-control mr-sm-2" style="width: 25rem" type="search" placeholder="Gözlemek" aria-label="Search">
