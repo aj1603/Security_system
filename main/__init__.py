@@ -4,6 +4,7 @@ from main.config import Config
 from flask_migrate import Migrate
 from flask_babel import Babel, format_date, gettext
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 babel = Babel(app)
+bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'boss_login'
 login_manager.login_message = 'Oýun ulgamyna giriň!'

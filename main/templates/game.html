@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>PS4_PS5-nyň SANAWY</h1>
+<h4 style="text-align:center; font-family: Arial; color: rgb(253, 253, 253); font-weight:bolder">PS4_PS5-nyň SANAWY</h4>
 <br/>
+<div class="flex-container" style="display: flex; flex-direction: row; flex-wrap: wrap ">
 {% for game_con in game_cons %} 
-    <div class="shadow p-3 mb-5 bg-body rounded">
-        <h4><b>Ady</b></h4>
+        <div class="shadow p-3 mb-5 bg-body rounded" style="width: 32%; margin-right: 15px; opacity: 80%; color: black; background-color:beige ">
+            <h5><b>Ady: {{ game_con.name }}</b></h5>
+            <h5><b>Bahasy (sagat): {{ game_con.pricePerHour }} manat</b></h5>
+            <h5><b>Başlanan wagty: {{ game_con.startTime }} </b></h5>
+            <h5><b>Gutaran wagty: {{ game_con.endTime }} </b></h5>
+            <h5><b>Oýunyň dowamlylygy: {{ game_con.playInterval }} </b></h5>
+            <h5><b>Oýunyň bahasy: {{ game_con.playPrice }} manat</b></h5>
+            <h5><b>Arzanladyş: {{ game_con.discount }} %</b></h5>
+            <a class="ml-2" href="{{ url_for('admins.first_time', id=game_con.id) }}" style="font-size: 20px; color: rgb(47, 163, 1); margin-right: 20px;">Başlat</a>
+            <a class="ml-2" href="{{ url_for('admins.second_time', id=game_con.id) }}" style="font-size: 20px; color: rgb(255, 14, 14); margin-right: 20px;">Duruz</a>
+            <a class="ml-2" href="{{ url_for('admins.update_discount', id=game_con.id) }}" style="font-size: 20px; color: rgb(11, 78, 235);">Arzanladyş</a>
+        </div>
+        
+        {% endfor %}
     </div>
-{% endfor %}
 {% endblock %}
 

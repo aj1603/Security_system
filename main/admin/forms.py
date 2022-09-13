@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, PasswordField, BooleanField
+from wtforms.validators import DataRequired, Email
 
 class ClientForm(FlaskForm):
     name = StringField('Ady', validators=[DataRequired()])
@@ -47,3 +47,13 @@ class GameUpdateForm(FlaskForm):
     today_sale = StringField('Arzanladyş(%)', validators=[DataRequired()])
     compitation = StringField('Ýaryşlar', validators=[DataRequired()])
     submit = SubmitField('Tazelemek')
+
+class DisCountForm(FlaskForm):
+    today_sale = StringField('Arzanladyş(%)', validators=[DataRequired()])
+    submit = SubmitField('Tazelemek')
+
+class LoginForm(FlaskForm):
+    phone = StringField('Telefon nomer', validators=[DataRequired()])
+    password = PasswordField('Gizlin belgi', validators=[DataRequired()])
+    remember = BooleanField('Ýatda sakla')
+    submit = SubmitField('Içeri gir')

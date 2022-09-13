@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    
-    <h2>Salam Hormatly Ulanyjy</h2>
 
-    <h2>Oýunlar Merkezine Hoş Geldiňiz<h2>
+<h2 style="text-align: center">BERKARAR SÖWDA WE MEDENI DYNÇ ALYŞ MERKEZI</h2>
 
-   
-{% endblock %}
+<h2 style="text-align: center">OÝUNLAR DÜNÝÄSI<h2>
+    <div class="main_image" style="width: 100%; height: 100%; margin-left:4%">
+		<img src="{{url_for('static', filename='./pes2023.png')}}" width="45%" height="400px">
+		<img src="{{url_for('static', filename='../static/admin/pictures/fifa22.jpg')}}" width="45%" height="400px"> 
+	</div>
+    <div class="slider_down" style="height:50%; margin-top:20px; margin-left:150px">
+        <img src="{{url_for('static', filename='../static/admin/pictures/ufc4.jpg')}}" style="margin-right: 2%;" width="20%" height="300px">
+        <img src="{{url_for('static', filename='../static/admin/pictures/mortal11k.jpg')}}" style="margin-right: 2%;" width="20%" height="300px">
+        <img src="{{url_for('static', filename='../static/admin/pictures/Mortaldik.jpg')}}" style="margin-right: 2%;" width="20%" height="300pxpx">
+        <img src="{{url_for('static', filename='../static/admin/pictures/cardik.jpg')}}" width="20%" height="300pxpx">
+    </div>
+        
+        
+        {% endblock %}

@@ -20,30 +20,27 @@
 		{% block css %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <title>Oýun Merkezi</title>
-	<!-- <style>
+	<style>
 		body {
-			background-image: './PS_PROJECT/arkafon.jpg'
+			/* background-image: url("../static/admin/pictures/arkafon.jpg") */
+			/* background-color: aquamarine; */
+			/* color: cyan; */
 		}
-	</style> -->
+
+	</style>
   </head>
   
   <body >
     {% include 'navigation.html' %}
     </br>
 	
-    <div class="container">
+    <div class="container" >
         {% block content %}
 
         {% endblock %}
     </div>
-	<div class="main_images">
-		<!-- <img src="./PS_PROJECT/pes2023.png" alt=""> -->
-		<!-- <img src="./PS_PROJECT/fifa22.jpg" alt=""> -->
-		<img src="../pictures/pes2023.png" width="75" height="75">
-		<img src="./pictures/gerek_logo.png" width="75" height="75">
-		<img src="./cdarkafon.jpg" width="75" height="75">
-	</div>
 	
+
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 		<script src="/static/admin/plugins/jquery-3.2.1.min.js"></script>
 		<script src="/static/admin/plugins/bootstrap/popper.min.js"></script>

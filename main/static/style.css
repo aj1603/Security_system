@@ -1,10 +1,9 @@
-h1 {
-    color: darkcyan;
-    font-size: 60px;
+h2 {
+    color: white;
+    /* font-size: 60px; */
 }
 
+
 body {
-    /* background-image: './templates/PS_PROJECT/arkafon.jpg' */
-    /* background: #747581; */
-    background-image: "./templates/pictures/arkafon.jpg"
+    background-image: url("./arkafon.jpg");
 }

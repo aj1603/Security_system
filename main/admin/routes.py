@@ -1,26 +1,65 @@
+from distutils.sysconfig import get_makefile_filename
 from flask import Blueprint, session, redirect, render_template, flash, request
+from sqlalchemy import null
 from main.models import Station, Client, Admin, Day, Month
 from main import db
-from datetime import datetime,timedelta
-from .forms import ClientForm, ClientUpdateForm, GameForm, GameUpdateForm
-    
+from datetime import datetime, timedelta
+from .forms import ClientForm, ClientUpdateForm, GameForm, GameUpdateForm, LoginForm, DisCountForm
+from flask_login import (
+	login_user,
+	current_user,
+	logout_user,
+)
 admins = Blueprint('admins', __name__)
-
 e = datetime.now()
+
 nol = 0
 
-@admins.route('/for_logo/')
-def for_logo():
-    return render_template("index.html")
+@admins.route('/', methods=["GET", "POST"])
+def login():
+	if request.method == 'GET':
+		if current_user.is_authenticated:
+			if current_user.isPatron == 1:
+				return redirect("/admin")
+		return render_template ("admin/login.html")
 
-@admins.route('/')
-def index():
+	if request.method == 'POST':
+		username = request.form.get("username")
+		password = request.form.get("password")
+		try:
+			user = Resident.query.filter_by(username = username).first()
+			if user:
+				if(user and user.password==password):
+					login_user(user)
+					next_page = request.args.get('next')
+					if user.typeId == 1:
+						return redirect(next_page) if next_page else redirect("/admin")
+					else:
+						return redirect(next_page) if next_page else redirect("/resident")
+				else:
+					raise Exception
+			else:
+				raise Exception				
+		except Exception as ex:
+			flash(f'Login ýalňyşlygy, ulanyjy ady ya-da açarsöz ýalnyş!','danger')
+			print(ex)
+	return render_template ("admin/login.html")
+
+
+@admins.route("/logout/")
+def logout():
+	logout_user()
+	return redirect(url_for("login"))
+
+
+@admins.route('/admin/for_logo/')
+def for_logo():
     return render_template("index.html")
 
 @admins.route('/all_ps4_ps5/')
 def all_ps4_ps5():
-    ps4_ps5s = Station.query.all()
-    return render_template("boss.html", ps4_ps5s=ps4_ps5s)
+    game_cons = Station.query.all()
+    return render_template("boss.html", game_cons=game_cons)
 
 
 @admins.route('/game_con/')
@@ -28,16 +67,19 @@ def game_con():
     game_cons = Station.query.all()
     return render_template("game.html", game_cons=game_cons)
 
-@admins.route('/first_time/<int:id>/')
+@admins.route('/game_con/first_time/<int:id>/')
 def first_time(id):
-    e = datetime.now()  
+    e = datetime.now()
     try:
         games = Station.query.get_or_404(id)
-        games.game_start_time = e
-        games.game_stop_time = nol
-        games.game_time = nol
-        games.play_price = nol
-        db.session.commit()
+        if games.startTime is not None:
+            game_cons = Station.query.all()
+            return render_template("game.html", game_cons=game_cons)            
+        games.startTime = e
+        games.endTime = None
+        games.playInterval = None
+        games.playPrice = nol
+        db.session.commit() 
         game_cons = Station.query.all()
         return render_template("game.html", game_cons=game_cons)
     except Exception as ex:
@@ -48,56 +90,46 @@ def second_time(id):
     e = datetime.now()
     try:
         games = Station.query.get_or_404(id)
-        second_time = e
-        d0 = games.game_start_time
-        d1 = str(second_time)
+        if games.endTime is not None:
+            game_cons = Station.query.all()
+            return render_template("game.html", game_cons=game_cons)
+        endTime = e
+        d0 = str(games.startTime)
+        d1 = str(endTime)
         d2 = datetime.strptime(d0, "%Y-%m-%d %H:%M:%S.%f") #yr, mo, day, hr, min, sec
         d3 = datetime.strptime(d1, "%Y-%m-%d %H:%M:%S.%f")
         d4 = str(d3 - d2)
-        games.game_time = d4
-        games.game_stop_time = d3
+        games.playInterval = d4
+        games.endTime = d3
+        games.startTime = None
         db.session.commit()
         try:
             games = Station.query.get_or_404(id)
-            d5 = games.game_time
-            d6 = games.full_game_hours
-            d7 = games.full_game_minutes
-            d8 = d5.split(':')
-            h_1 = int(d8[0])
-            m_1 = int(d8[1])
-            money = ((h_1 * 60) + m_1)
-            sony = games.id
-            if sony == 1 or sony == 2:
-                full_money = money * 0.583333333
-                games.play_price = full_money
-                db.session.commit()
-            elif sony == 3 or sony == 4 or sony == 5 or sony == 6:
-                full_money = money * 0.416666667
-                games.play_price = full_money
-                db.session.commit()
-            elif sony == 7 or sony == 8 or sony == 9 or sony == 10:
-                full_money = money * 0.333333333
-                games.play_price = full_money
-                db.session.commit()
-            d4 = int(d6)
-            d5 = int(d7)
-            hours = (h_1 + d4)
-            minutes = (m_1 + d5)
-            if minutes >= 60:
-                hours_full = hours + 1
-                minutes_full = minutes - 60
-                print(hours_full, minutes_full)
-                games.full_game_hours = hours_full
-                games.full_game_minutes = minutes_full
-                db.session.commit()
+            d6 = games.discount
+            if d6 > 0:
+                d5 = games.playInterval
+                d8 = d5.split(':')
+                h_1 = int(d8[0])
+                m_1 = int(d8[1])
+                money = ((h_1 * 60) + m_1)
+                sony = games.id
+                if sony == 1 or sony == 2:
+                    full_money = money * 0.583333333
+                    fullMoney = full_money - ((full_money * d6)/100)
+                    games.playPrice = fullMoney
+                    db.session.commit()
+                elif sony == 3 or sony == 4 or sony == 5 or sony == 6:
+                    full_money = money * 0.416666667
+                    fullMoney = full_money - ((full_money * d6)/100)
+                    games.playPrice = fullMoney
+                    db.session.commit()
+                elif sony == 7 or sony == 8 or sony == 9 or sony == 10:
+                    full_money = money * 0.333333333
+                    fullMoney = full_money - ((full_money * d6)/100)                    
+                    games.playPrice = fullMoney
+                    db.session.commit()
                 game_cons = Station.query.all()
                 return render_template("game.html", game_cons=game_cons)
-            games.full_game_hours = hours
-            games.full_game_minutes = minutes
-            games.game_start_time = nol
-            db.session.commit()
-            game_cons = Station.query.all()
-            return render_template("game.html", game_cons=game_cons)
         except Exception as ex:
             print(f"error, couldn't make a request (connection issue) {ex}",200)
     except Exception as ex:
@@ -177,11 +209,19 @@ def full_count_price():
     except Exception as ex:
         print(f"error, couldn't make a request (connection issue) {ex}",200)
 
-@admins.route('/all_clients/')
-def all_clients():
-    our_clients = Client.query.all()
-    return render_template("client.html", our_clients=our_clients)
-
+@admins.route('/update_discount/<int:id>/', methods=['GET', 'POST'])
+def update_discount(id):
+    disCount = Station.query.get_or_404(id)
+    form = DisCountForm()
+    if form.validate_on_submit():
+        print("alo")
+        disCount.discount = form.today_sale.data
+        db.session.commit()
+        game_cons = Station.query.all()
+        return render_template("game.html", game_cons=game_cons)
+    elif request.method == 'GET':
+        form.today_sale.data = disCount.discount
+        return render_template("discount.html", form=form)
 
 @admins.route('/client/<int:id>/delete/', methods=['GET', 'POST'])
 def delete_client(id):
@@ -204,7 +244,7 @@ def update_client(id):
         clients.phone_number = form.phone_number.data
         clients.secret_key = form.secret_key.data
         clients.play_time = form.play_time.data
-        clients.play_price = form.play_price.data
+        clients.playPrice = form.playPrice.data
         clients.play_sale = form.play_sale.data
         clients.full_play_time = form.full_play_time.data
         db.session.commit()
@@ -218,7 +258,7 @@ def update_client(id):
         form.phone_number.data = clients.phone_number
         form.secret_key.data = clients.secret_key
         form.play_time.data = clients.play_time
-        form.play_price.data = clients.play_price
+        form.playPrice.data = clients.playPrice
         form.play_sale.data = clients.play_sale
         form.full_play_time.data = clients.full_play_time
 
@@ -230,7 +270,7 @@ def add_clients():
     if form.validate_on_submit():
         new_client = Station.query.filter_by(secret_key=form.secret_key.data).first()
         if new_client is None:
-            new_client = Station(name=form.name.data, surname=form.surname.data, username=form.username.data, password=form.password.data, phone_number=form.phone_number.data, secret_key = form.secret_key.data, play_time = form.play_time.data, play_price = form.play_price.data, play_sale = form.play_sale.data, full_play_time = form.full_play_time.data)
+            new_client = Station(name=form.name.data, surname=form.surname.data, username=form.username.data, password=form.password.data, phone_number=form.phone_number.data, secret_key = form.secret_key.data, play_time = form.play_time.data, playPrice = form.playPrice.data, play_sale = form.play_sale.data, full_play_time = form.full_play_time.data)
             db.session.add(new_client)
             db.session.commit()
         name = form.name.data
@@ -241,7 +281,7 @@ def add_clients():
         form.phone_number.data = ''
         form.secret_key.data = ''
         form.play_time.data = ''
-        form.play_price.data = ''
+        form.playPrice.data = ''
         form.play_sale.data = ''
         form.full_play_time.data = ''
     title = "hi"

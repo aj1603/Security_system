@@ -4,26 +4,29 @@ admins = [
         "name": "Boss",
         "surname": "Bossow",
         "email": "boss@gmail.com",
-        "password": "boss123",
-        "phoneNumber": "+99360000000"
+        "password": "boss123321",
+        "phoneNumber": "+99360000000",
+        "isPatron": True
     }
 ]
 
 securitys = [
     {
-        "id": 1,
-        "name": "Securyti",
-        "surname": "securyti_ow",
-        "email": "securyti_@gmail.com",
-        "password": "securyti_123",
-        "phoneNumber": "+99360000000"
+        "id": 3,
+        "name": "Kerwen",
+        "surname": "Kerwenow",
+        "email": "kerwen@gmail.com",
+        "password": "kerwen123",
+        "phoneNumber": "+99360000001",
+        "isPatron": False
     },
     {
         "id": 2,
-        "name": "securyt_2",
-        "surname": "securyt_2ow",
-        "email": "securyt_2@gmail.com",
-        "password": "securyt_2123",
-        "phoneNumber": "+99360000000"
+        "name": "Abdulla",
+        "surname": "Abdullayew",
+        "email": "abdulla@gmail.com",
+        "password": "abdulla123",
+        "phoneNumber": "+99360000002",
+        "isPatron": False
     }
 ]
