@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="text-align:center; color: #fff">GÜNLIK HASAPLAMALAR</h1>
+<br/>
+<div class="flex-container" style="display: flex; flex-direction: row; flex-wrap: wrap ">
+    {% for day in days %} 
+        <div class="shadow p-3 mb-5 bg-body rounded" style="width: 32%; margin-right: 15px; opacity: 80%; color: black; background-color:beige ">
+            <h5><b>Ady: {{ day.name }}</b></h5>
+            <h5><b>Wagty: {{ day.playedTime }} (minut)</b></h5>
+            <h5><b>Girdeýji: {{ day.playedPrice }} (manat)</b></h5>
+        </div>
+    {% endfor %}
+    <h2 style="width: 32%; margin-right: 15px; opacity: 80%; color: black; background-color: beige; border-radius: 4px; height: 112px;display: flex; justify-content:center; align-items: center;">GÜNLIK GIRDEÝJI: {{ totalSum }}</h2>
+    <a class="ml-2" href="{{ url_for('admins.deleteDay') }}" style="font-size: 20px;width: 32%; margin-right: 15px; opacity: 80%;;color: rgb(246, 90, 0); background-color: beige; border-radius: 4px; height: 112px;display: flex; justify-content:center; align-items: center;">ÖÇÜRMEK</a>
+</div>
+{% endblock %}
+

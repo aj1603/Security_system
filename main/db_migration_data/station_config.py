@@ -1,4 +1,4 @@
-ps4_ps5_config = [
+stations = [
     {
         "id": 1,
         "status": 0,

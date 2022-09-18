@@ -1,3 +1,4 @@
+from calendar import month
 from datetime import datetime
 from xmlrpc import client
 from main import app, db, login_manager
@@ -47,9 +48,9 @@ class Station(db.Model):
     playInterval = db.Column(db.Integer)
     playPrice = db.Column(db.Float(150))
     discount = db.Column(db.Float(150))
-    dayId = db.Column(db.Integer,db.ForeignKey("day.id"))
-    monthId = db.Column(db.Integer,db.ForeignKey("month.id"))
-    nodeId = db.Column(db.Integer,db.ForeignKey("node.id"))
+    day = db.relationship("Day", uselist=False, backref="station")
+    month = db.relationship("Month", uselist=False, backref="station")
+    node = db.relationship("Node", uselist=False, backref="station")
     dateAdded = db.Column(db.DateTime,default=datetime.now())
     dateUpdated = db.Column(db.DateTime,default=datetime.now())
     
@@ -65,61 +66,62 @@ class Station(db.Model):
             "playInterval": self.playInterval,
             "playPrice": self.playPrice,
             "discount": self.discount,
-            "dayinfos": self.dayinfos,
-            "monthinfos": self.monthinfos,
-            "devices": self.devices,
             "dateAdded": self.dateAdded,
             "dateUpdated": self.dateUpdated,
         }
         return playstation
 
     def __repr__(self):
-        return f"Ps4_Ps5('{self.status}', '{self.isVip}', '{self.name}', '{self.pricePerHour,}', '{self.startTime,}', '{self.discount}', '{self.endTime,}', '{self.dayinfos}', '{self.monthinfos}', '{self.playInterval,}', '{self.playPrice,}', '{self.devices}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"Station('{self.status}', '{self.isVip}', '{self.name}', '{self.pricePerHour,}', '{self.startTime,}', '{self.discount}', '{self.endTime,}', '{self.playPrice,}', '{self.node}', '{self.dateAdded}', '{self.dateUpdated})"
 
 class Day(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    playedTime = db.Column(db.Integer)
-    playedPrice = db.Column(db.Float(150))
-    stations = db.relationship('Station',backref='day',lazy='joined')
+    name = db.Column(db.String(200))
+    playedTime = db.Column(db.Integer, default=0)
+    playedPrice = db.Column(db.Float(150), default=0.0)    
+    stationId = db.Column(db.Integer,db.ForeignKey("station.id"))
     dateAdded = db.Column(db.DateTime,default=datetime.now())
     dateUpdated = db.Column(db.DateTime,default=datetime.now(),onupdate=datetime.now())
     
     def json(self):
-        dayinfo = {
+        day = {
             "id": self.id,
+            "name": self.name,
             "playedTime": self.playedTime,
             "playedPrice": self.playedPrice,
-            "playstation_id": self.playstation_id,
+            "stationId": self.stationId,
             "dateAdded": self.dateAdded,
             "dateUpdated": self.dateUpdated,
         }
-        return dayinfo
+        return day
 
     def __repr__(self):
-        return f"DayInfo('{self.playedTime}', '{self.playedPrice}', '{self.ps4_ps5Id}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"Day('{self.name}', '{self.playedTime}', '{self.playedPrice}', '{self.stationId}', '{self.dateAdded}', '{self.dateUpdated}')"
 
 
 class Month(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    playedTime = db.Column(db.Integer)
-    playedPrice = db.Column(db.Float(150))
-    stations = db.relationship('Station',backref='month',lazy='joined')
+    name = db.Column(db.String(200))
+    playedTime = db.Column(db.Integer, default=0)
+    playedPrice = db.Column(db.Float(150), default=0.0)
+    stationId = db.Column(db.Integer,db.ForeignKey("station.id"))
     dateAdded = db.Column(db.DateTime,default=datetime.now())
     dateUpdated = db.Column(db.DateTime,default=datetime.now(),onupdate=datetime.now())
     
     def json(self):
-        monthinfo = {
+        month = {
             "id": self.id,
+            "name": self.name,
             "playedTime": self.playedTime,
             "playedPrice": self.playedPrice,
-            "playstation_id": self.playstation_id,
+            "stationId": self.stationId,
             "dateAdded": self.dateAdded,
             "dateUpdated": self.dateUpdated,
         }
-        return monthinfo
+        return month
 
     def __repr__(self):
-        return f"MonthInfo('{self.playedTime}', '{self.playedPrice}', '{self.playstation_id}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"Month('{self.name}', '{self.playedTime}', '{self.playedPrice}', '{self.stationId}', '{self.dateAdded}', '{self.dateUpdated})"
 
 class Node(db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -129,12 +131,12 @@ class Node(db.Model):
     secretKey = db.Column(db.String(1000),nullable=False)
     command = db.Column(db.String(100))
     state = db.Column(db.Integer,default=0)
-    stations = db.relationship('Station',backref='node',lazy='joined')
+    stationId = db.Column(db.Integer,db.ForeignKey("station.id"))
     dateAdded = db.Column(db.DateTime,default=datetime.now())
     dateUpdated = db.Column(db.DateTime,default=datetime.now(),onupdate=datetime.now())
 
     def json(self):
-        device = {
+        node = {
             "id": self.id,
             "name": self.name,
             "ip": self.ip,
@@ -142,14 +144,14 @@ class Node(db.Model):
             "secretKey": self.secretKey,
             "command": self.command,
             "state": self.state,
-            "playstation_id": self.playstation_id,
+            "stationId": self.stationId,
             "dateAdded": self.dateAdded,
             "dateUpdated": self.dateUpdated,
         }
-        return device
+        return node
 
     def __repr__(self):
-        return f"Device('{self.name}', '{self.ip}', '{self.deviceKey}', '{self.command}', '{self.secretKey}', '{self.state}', '{self.playstation_id}', '{self.dateAdded}', '{self.dateUpdated}')"
+        return f"Node('{self.name}', '{self.ip}', '{self.deviceKey}', '{self.command}', '{self.secretKey}', '{self.state}', '{self.stationId}', '{self.dateAdded}', '{self.dateUpdated}')"
 
 class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)

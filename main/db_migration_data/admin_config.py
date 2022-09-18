@@ -10,7 +10,7 @@ admins = [
     }
 ]
 
-securitys = [
+securities = [
     {
         "id": 3,
         "name": "Kerwen",

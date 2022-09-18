@@ -10,16 +10,17 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('admins.game_con') }}" style="color: white">Iş ýörediji</a>
           </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('admins.all_ps4_ps5') }}" style="color: white">Başlyk</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('admins.full_count_price') }}" style="color: white">Günlik hasaplamak</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('admins.month_count_price') }}" style="color: white">Aýlyk hasaplamak</a>
-          </li>        
+          {% if current_user.isPatron %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('admins.all_ps4_ps5') }}" style="color: white">Başlyk</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('admins.dayReport') }}" style="color: white">Günlik hasaplamalar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('admins.monthReport') }}" style="color: white">Aýlyk hasaplamalar</a>
+            </li>  
+          {% endif %}      
         </ul>
         <!-- <form class="form-inline">
           <input class="form-control mr-sm-2" style="width: 25rem" type="search" placeholder="Gözlemek" aria-label="Search">

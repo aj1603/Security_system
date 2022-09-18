@@ -52,8 +52,12 @@ class DisCountForm(FlaskForm):
     today_sale = StringField('Arzanladyş(%)', validators=[DataRequired()])
     submit = SubmitField('Tazelemek')
 
+class BuyForm(FlaskForm):
+    buy_something = StringField('Satyn alynan harydyň bahasy', validators=[DataRequired()])
+    submit = SubmitField('Satyn al!')
+
 class LoginForm(FlaskForm):
-    phone = StringField('Telefon nomer', validators=[DataRequired()])
+    phone = StringField('Telefon', validators=[DataRequired()])
     password = PasswordField('Gizlin belgi', validators=[DataRequired()])
     remember = BooleanField('Ýatda sakla')
     submit = SubmitField('Içeri gir')
