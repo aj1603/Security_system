@@ -54,48 +54,55 @@ def scanNetwork():
 
 @devices.route("/buy_something/", methods=["GET", "POST"])
 def buy_something():
-	if request.method == "POST":
-		req = request.get_json()
-		reqId = req.get("id")
-		reqPrice = req.get("playPrice")
+    if request.method == "POST":
+        req = request.get_json()
+        reqCommand = req.get("command")
+        reqPrice = req.get("playPrice")
+        print(reqPrice, reqCommand)
 
-		buy = Station.query.filter_by(id=reqId).first()
-		dayBuy = Day.query.filter_by(id=buy.id).first()
-		monthBuy = Month.query.filter_by(id=buy.id).first()
-		buy.playPrice += reqPrice
-		dayBuy.playedPrice += reqPrice
-		monthBuy.playedPrice += reqPrice
-		db.session.commit()
-		return "Hasaplandy"
+        buy = Station.query.filter_by(command=reqCommand).first()
+        dayBuy = Day.query.filter_by(id=buy.id).first()
+        monthBuy = Month.query.filter_by(id=buy.id).first()
+        satynAl = int(reqPrice)
+        print(satynAl)
+        buy.playPrice += satynAl
+        dayBuy.playedPrice += satynAl
+        monthBuy.playedPrice += satynAl
+        db.session.commit()
+        return "Hasaplandy"
 
 
 @devices.route("/nodemcuControl/", methods=['GET','POST'])
 def nodemcuControl():
-	if request.method == 'POST':
-		req = request.get_json()
-		command = req["command"]
-		state = req["state"]
+    if request.method == 'POST':
+        req = request.get_json()
+        command = req["command"]
+        state = req["state"]
 
-		device = Node.query.filter_by(command = command).first()
-		global idForStation
-		idForStation = (device.id)
-		device.state=state
-		db.session.commit()
-		if device.state == 1:
-			first_time()
-			print("first")
-		if device.state == 0:
-			second_time()
-			print("second")
-		controlIp = device.ip
-		deviceState = str(device.state)	
-
-		try:
-			requests.get("http://{}/control/?command={}".format(controlIp, deviceState))
-			return "OK"
-		except Exception as ex:
-			return 'Error'
-	return make_response("error, couldn't make a request (no device found)",200)
+        device = Node.query.filter_by(command = command).first()
+        global idForStation
+        idForStation = (device.id)
+        device.state=state
+        db.session.commit()
+        if device.state == 1:
+            print("first_time")
+            first_time()
+            print("first")
+        if device.state == 0:
+            print("second_time")
+            second_time()
+            print("second")
+        controlIp = device.ip
+        deviceState = str(device.state)	
+        print(controlIp, deviceState)
+        try:
+            print("ugratjak")
+            requests.get("http://{}/control/?command={}".format(controlIp, deviceState))
+            print("ugradyldy")
+            return "OK"
+        except Exception as ex:
+            return 'Error'
+    return make_response("error, couldn't make a request (no device found)",200)
 
 #first_time_dontrol
 def first_time():
@@ -117,8 +124,8 @@ def second_time():
     e = datetime.now()
     try:
         games = Station.query.filter_by(id = idForStation).first()
-        day = Day.query.filter_by(stationId=games.id).first()
-        month = Month.query.filter_by(stationId=games.id).first()
+        day = Day.query.filter_by(id=games.id).first()
+        month = Month.query.filter_by(id=games.id).first()
         if games.endTime is not None:
             return "Hasaplanmady"
         endTime = e
@@ -136,14 +143,12 @@ def second_time():
         games.endTime = d3
         games.startTime = None
         db.session.commit()
-        print("alo")
         try:
             games = Station.query.filter_by(id = idForStation).first()
             day = Day.query.filter_by(stationId=games.id).first()
             month = Month.query.filter_by(stationId=games.id).first()
             d6 = games.discount
             if d6 == 0:
-                print("alo")
                 money = games.playInterval
                 idStation = games.id
                 if idStation == 1 or idStation == 2:

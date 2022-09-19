@@ -93,8 +93,11 @@ def first_time(id):
         db.session.commit() 
         controlIp = nodes.ip
         deviceState = nodes.state
+        print(controlIp, deviceState)
         try:
+            print("Ugratjak")
             requests.get("http://{}/control/?command={}".format(controlIp, deviceState))
+            print("ugradyldy")
             game_cons = Station.query.all()
             return render_template("game.html", game_cons=game_cons)
         except Exception as ex:
@@ -130,19 +133,16 @@ def second_time(id):
         nodes.state = 0
         games.startTime = None
         db.session.commit()
-        print("alo")
         try:
             games = Station.query.get_or_404(id)
             day = Day.query.filter_by(stationId=games.id).first()
             month = Month.query.filter_by(stationId=games.id).first()
             d6 = games.discount
             if d6 == 0:
-                print("alo")
                 money = games.playInterval
                 idStation = games.id
                 if idStation == 1 or idStation == 2:
                     full_money = money * 0.583333333
-                    print(full_money)
                     games.playPrice += full_money
                     day.playedPrice += full_money
                     month.playedPrice += full_money
@@ -159,10 +159,18 @@ def second_time(id):
                     day.playedPrice += full_money
                     month.playedPrice += full_money
                     db.session.commit()
-                game_cons = Station.query.all()
-                return render_template("game.html", game_cons=game_cons)
+                controlIp = nodes.ip
+                deviceState = nodes.state
+                print(controlIp, deviceState)
+                try:
+                    print("ugratjak_2")
+                    requests.get("http://{}/control/?command={}".format(controlIp, deviceState))
+                    print("Ugradyldy_2")
+                    game_cons = Station.query.all()
+                    return render_template("game.html", game_cons=game_cons)
+                except Exception as ex:
+                    return 'Error'
             if d6 > 0:
-                print("alo")
                 money = games.playInterval
                 idStation = games.id
                 if idStation == 1 or idStation == 2:
@@ -188,8 +196,11 @@ def second_time(id):
                     db.session.commit()
                 controlIp = nodes.ip
                 deviceState = nodes.state
+                print(controlIp, deviceState)
                 try:
+                    print("ugratjak_2")
                     requests.get("http://{}/control/?command={}".format(controlIp, deviceState))
+                    print("Ugradyldy_2")
                     game_cons = Station.query.all()
                     return render_template("game.html", game_cons=game_cons)
                 except Exception as ex:
@@ -223,7 +234,6 @@ def buy_something(id):
 def update_discount(id):
     disCount = Station.query.get_or_404(id)
     form = DisCountForm()
-    print("hello")
     if form.validate_on_submit():
         disCount.discount = form.today_sale.data
         db.session.commit()

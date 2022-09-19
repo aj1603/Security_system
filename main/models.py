@@ -42,11 +42,12 @@ class Station(db.Model):
     status = db.Column(db.String(150), nullable=False)
     isVip = db.Column(db.Boolean, default=False)
     name = db.Column(db.String(200))
+    command = db.Column(db.String(200))
     pricePerHour = db.Column(db.Float(150))
     startTime = db.Column(db.DateTime, nullable=True)
     endTime = db.Column(db.DateTime, nullable=True)
     playInterval = db.Column(db.Integer)
-    playPrice = db.Column(db.Float(150))
+    playPrice = db.Column(db.Float(150), default=0.0)
     discount = db.Column(db.Float(150))
     day = db.relationship("Day", uselist=False, backref="station")
     month = db.relationship("Month", uselist=False, backref="station")
@@ -60,6 +61,7 @@ class Station(db.Model):
             "status": self.status,
             "isVip": self.isVip,
             "name": self.name,
+            "command": self.command,
             "pricePerHour": self.pricePerHour,
             "startTime": self.startTime,
             "endTime": self.endTime,
@@ -72,7 +74,7 @@ class Station(db.Model):
         return playstation
 
     def __repr__(self):
-        return f"Station('{self.status}', '{self.isVip}', '{self.name}', '{self.pricePerHour,}', '{self.startTime,}', '{self.discount}', '{self.endTime,}', '{self.playPrice,}', '{self.node}', '{self.dateAdded}', '{self.dateUpdated})"
+        return f"Station('{self.status}', '{self.isVip}', '{self.name}', '{self.command}', '{self.pricePerHour,}', '{self.startTime,}', '{self.discount}', '{self.endTime,}', '{self.playPrice,}', '{self.node}', '{self.dateAdded}', '{self.dateUpdated})"
 
 class Day(db.Model):
     id = db.Column(db.Integer, primary_key=True)
