@@ -4,8 +4,17 @@ admins = [
         "name": "Boss",
         "surname": "Bossow",
         "email": "boss@gmail.com",
-        "password": "boss123321",
-        "phoneNumber": "+99360000000",
+        "password": "boss654123",
+        "phoneNumber": "+99361112233",
+        "isPatron": True
+    },
+    {
+        "id": 2,
+        "name": "Kerwen",
+        "surname": "Kerwenow",
+        "email": "sowgatfilm@gmail.com",
+        "password": "sowgat",
+        "phoneNumber": "+99364806141",
         "isPatron": True
     }
 ]
@@ -13,20 +22,20 @@ admins = [
 securities = [
     {
         "id": 3,
-        "name": "Kerwen",
-        "surname": "Kerwenow",
-        "email": "kerwen@gmail.com",
-        "password": "kerwen123",
-        "phoneNumber": "+99360000001",
+        "name": "Omar",
+        "surname": "Omarow",
+        "email": "Omarovhojamyrat@gmail.com",
+        "password": "omar4558cd ",
+        "phoneNumber": "+99362723062",
         "isPatron": False
     },
     {
-        "id": 2,
-        "name": "Abdulla",
-        "surname": "Abdullayew",
-        "email": "abdulla@gmail.com",
-        "password": "abdulla123",
-        "phoneNumber": "+99360000002",
+        "id": 4,
+        "name": "Didar",
+        "surname": "Bashimow",
+        "email": "didarbyashimovx@gmail.com",
+        "password": "altynasyr",
+        "phoneNumber": "+99361176663",
         "isPatron": False
     }
 ]

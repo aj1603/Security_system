@@ -20,7 +20,10 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('admins.monthReport') }}" style="color: white">Aýlyk hasaplamalar</a>
             </li>  
-          {% endif %}      
+          {% endif %}  
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('devices.scanNetwork') }}" style="color: white">Baglan</a>
+          </li>    
         </ul>
         <!-- <form class="form-inline">
           <input class="form-control mr-sm-2" style="width: 25rem" type="search" placeholder="Gözlemek" aria-label="Search">

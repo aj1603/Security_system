@@ -78,20 +78,18 @@ def nodemcuControl():
         req = request.get_json()
         command = req["command"]
         state = req["state"]
+        print(req)
 
         device = Node.query.filter_by(command = command).first()
         global idForStation
-        idForStation = (device.id)
+        idForStation = device.id
+        print(device.id)
         device.state=state
         db.session.commit()
         if device.state == 1:
-            print("first_time")
             first_time()
-            print("first")
         if device.state == 0:
-            print("second_time")
             second_time()
-            print("second")
         controlIp = device.ip
         deviceState = str(device.state)	
         print(controlIp, deviceState)
@@ -115,7 +113,8 @@ def first_time():
         games.endTime = None
         games.playInterval = None
         games.playPrice = nol
-        db.session.commit() 
+        db.session.commit()
+        return "Wagt bashlady"
     except Exception as ex:
         print(f"error, couldn't make a request (connection issue) {ex}",200)
 
@@ -158,19 +157,21 @@ def second_time():
                     day.playedPrice += full_money
                     month.playedPrice += full_money
                     db.session.commit()
+                    return "Hasaplandy"
                 elif idStation == 3 or idStation == 4:
                     full_money = money * 0.416666667
                     games.playPrice += full_money
                     day.playedPrice += full_money
                     month.playedPrice += full_money
                     db.session.commit()
+                    return "Hasaplandy"
                 elif idStation == 5 or idStation == 6 or idStation == 7 or idStation == 8 or idStation == 9 or idStation == 10:
                     full_money = money * 0.333333333                  
                     games.playPrice += full_money
                     day.playedPrice += full_money
                     month.playedPrice += full_money
                     db.session.commit()
-                return "Hasaplandy"
+                    return "Hasaplandy"
             if d6 > 0:
                 money = games.playInterval
                 idStation = games.id
@@ -181,6 +182,7 @@ def second_time():
                     day.playedPrice += fullMoney
                     month.playedPrice += full_money
                     db.session.commit()
+                    return "Hasaplandy"
                 elif idStation == 3 or idStation == 4:
                     full_money = money * 0.416666667
                     fullMoney = full_money - ((full_money * d6)/100)
@@ -188,6 +190,7 @@ def second_time():
                     day.playedPrice += fullMoney
                     month.playedPrice += full_money
                     db.session.commit()
+                    return "Hasaplandy"
                 elif idStation == 5 or idStation == 6 or idStation == 7 or idStation == 8 or idStation == 9 or idStation == 10:
                     full_money = money * 0.333333333
                     fullMoney = full_money - ((full_money * d6)/100)                    
@@ -195,7 +198,9 @@ def second_time():
                     day.playedPrice += fullMoney
                     month.playedPrice += full_money
                     db.session.commit()
+                    return "Hasaplandy"
                 return "Hasaplandy"
+            return "Hasaplandy"
         except Exception as ex:
             print(f"error, couldn't make a request (connection issue) {ex}",200)
     except Exception as ex:

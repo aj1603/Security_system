@@ -66,3 +66,8 @@ systemctl restart nginx
 
 command for server
 curl --header "Content-Type: application/json" --request POST --data '{"command":"test_local","action":"1"}' http://192.168.1.88:5000/esp/JsonToArg/
+
+
+control nodemcu
+curl --header "Content-Type: application/json" --request POST --data '{"command":"play_station_three","state":1,"action":"1"}' http://192.168.0.112:8080/nodemcuControl/
+
