@@ -28,9 +28,9 @@ app.register_blueprint(devices)
 
 
 
-@babel.localeselector
-def get_locale():
-    language = Config.BABEL_DEFAULT_LOCALE
-    if 'language' in session:
-        language = session['language'] if session['language'] else Config.BABEL_DEFAULT_LOCALE
-    return language
+# @babel.localeselector
+# def get_locale():
+#     language = Config.BABEL_DEFAULT_LOCALE
+#     if 'language' in session:
+#         language = session['language'] if session['language'] else Config.BABEL_DEFAULT_LOCALE
+#     return language
